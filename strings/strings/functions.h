@@ -23,9 +23,10 @@ WORD randomWord()
 	WORD  generatedWord = words[randIndex];
 	return generatedWord;
 }
+
 string wordChanger(string difficulty, string word)
 {
-	int hiddenLetters;
+	int hiddenLetters, availableleSpace = word.size();
 	if (difficulty == "easy")
 	{
 		hiddenLetters = 3;
@@ -38,15 +39,18 @@ string wordChanger(string difficulty, string word)
 	{
 		hiddenLetters = 5;
 	}
-	while (hiddenLetters>0)
+	while (hiddenLetters > 0 && availableleSpace > 1)
 	{
 		int delIndex = getRandNumber(0, word.size() - 1);
 		if (word[delIndex] != '_')
 		{
+			word[delIndex] = '_';
+			availableleSpace--;
 			hiddenLetters--;
+
 		}
-		return word;
 	}
+	return word;
 }
 void Menu()
 {
