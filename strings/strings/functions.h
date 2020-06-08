@@ -52,6 +52,40 @@ string wordChanger(string difficulty, string word)
 	}
 	return word;
 }
+
+void checkWord(string word, string correctWord)
+{
+		bool findOrNot;
+		cout << "Please, guess a letter from the word you're guessing!" << endl;
+		char letter;
+		cin >> letter;
+		if (correctWord.find(letter) != string::npos)
+		{
+			for (int i = 0; i < correctWord.size(); i++)
+			{
+				if (correctWord[i] == letter)
+				{
+					word[i] = letter;
+					findOrNot = true;
+				}
+			}
+			if (word == correctWord)
+			{
+				cout << "Congratulations! You guessed the whole word!" << endl;
+			}
+			else
+			{
+				cout << "Correct!" << endl;
+			}
+		}
+		else
+		{
+			cout << "The word doesn't have that letter. Please try again:" << endl;
+			cin >> letter;
+			checkWord(word, correctWord);
+		}
+}
+
 void Menu()
 {
 	WORD selectedWord;
@@ -76,7 +110,9 @@ void Menu()
 
 
 		selectedWord = randomWord();
-		cout << "The word is " << wordChanger(difficulty, selectedWord.name) << endl;
+		string changedString= wordChanger(difficulty, selectedWord.name);
+		cout << "The word is " << changedString << endl;
 		cout << "The topic is " << selectedWord.topic << endl;
+		checkWord(selectedWord.name, changedString);
 	}
 }
