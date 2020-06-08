@@ -23,9 +23,34 @@ WORD randomWord()
 	WORD  generatedWord = words[randIndex];
 	return generatedWord;
 }
-bool Menu()
+string wordChanger(string difficulty, string word)
 {
-	WORD word1;
+	int hiddenLetters;
+	if (difficulty == "easy")
+	{
+		hiddenLetters = 3;
+	}
+	else if (difficulty == "medium")
+	{
+		hiddenLetters = 4;
+	}
+	else if (difficulty == "hard")
+	{
+		hiddenLetters = 5;
+	}
+	while (hiddenLetters>0)
+	{
+		int delIndex = getRandNumber(0, word.size() - 1);
+		if (word[delIndex] != '_')
+		{
+			hiddenLetters--;
+		}
+		return word;
+	}
+}
+void Menu()
+{
+	WORD selectedWord;
 	int roundsCount, correct = 0, wrong = 0;
 	string difficulty;
 	cout << "How many rounds do you wish to play: ";
@@ -46,9 +71,8 @@ bool Menu()
 		while (difficulty != "easy" && difficulty != "medium" && difficulty != "hard");
 
 
-		word1 = randomWord();
-		cout << "The word is " << word1.name << endl;
-		cout << "The topic is " << word1.topic << endl;
-		return false;
+		selectedWord = randomWord();
+		cout << "The word is " << wordChanger(difficulty, selectedWord.name) << endl;
+		cout << "The topic is " << selectedWord.topic << endl;
 	}
 }
