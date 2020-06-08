@@ -8,6 +8,11 @@
 using namespace std;
 int main()
 {
-    
+    bool result;
+    while (1)
+    {
+        result = Menu();
+        return result;
+    }
     return 0;
 }
