@@ -11,9 +11,33 @@ struct WORD
 	string topic;
 };
 
+//the random word's that are 
 WORD words[6] = {
 	 {"sunflower","flowers"},
 	 {"Australia","countries"},
 	 {"Bulgaria","countries"},
 	 {"France","countries"},
+	{"cucumber", "vegetable"},
+	{"watermelon", "fruit"},
+	{"blueberry", "fruit"},
+	{"strawberry", "fruit"},
+	{"builder", "profession"},
+	{"doctor", "profession"},
+	{"waiter", "profession"},
+	{"onion", "vegetable"},
+	{"cauliflower", "vegetable"},
+	{"broccoli", "vegetable"},
+	{"Estonia", "countries"},
+	{"Germany", "countries"},
+	{"Portugal", "countries"},
+	{"Switzerland", "countries"},
+	{"Norway", "countries"},
+	{"lasagna", "food"},
+	{"spaghetti", "food"},
+	{"hamburger", "food"},
+	{"seafood", "food"},
+	{"milkshake", "drink"},
+	{"lemonade", "drink"},
+	{"coffee", "drink"}
+
 };
