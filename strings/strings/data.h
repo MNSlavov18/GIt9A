@@ -12,7 +12,7 @@ struct WORD
 };
 
 //the random word's that are 
-WORD words[6] = {
+WORD words[30] = {
 	 {"sunflower","flowers"},
 	 {"Australia","countries"},
 	 {"Bulgaria","countries"},
@@ -41,3 +41,4 @@ WORD words[6] = {
 	{"coffee", "drink"}
 
 };
+int arraySize = 26;

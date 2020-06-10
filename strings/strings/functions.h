@@ -20,7 +20,7 @@ int getRandNumber(int lowerNumber, int upperNumber)
 WORD randomWord()
 {
 	int randIndex;
-	randIndex = getRandNumber(0, 3);
+	randIndex = getRandNumber(0, arraySize - 1);
 	WORD  generatedWord = words[randIndex];
 	return generatedWord;
 }
@@ -58,17 +58,19 @@ void checkWord(string word, string correctWord)
 	bool guessedWord = false;
 	while (1)
 	{
-		cout << "Please, guess a letter from the word you're guessing:";
+		cout << "Please, guess a letter from the word you're guessing: ";
 		char letter;
+		bool replaced = false;
 		cin >> letter;
 		//makes the letter that you search for lowercase
 		letter = tolower(letter);
 		if (correctWord.find(letter) != string::npos)
 		{
-			
+
 			for (int i = 0; i < correctWord.size(); i++)
 			{
-				cout << correctWord[i] << " " << letter << endl;
+				//cout << correctWord[i] << " " << letter << endl;
+				//blueberry r bluebe__y
 				if (correctWord[i] == letter)
 				{
 					word[i] = letter;
@@ -78,10 +80,10 @@ void checkWord(string word, string correctWord)
 						guessedWord = true;
 						break;
 					}
-					else
+					else if (replaced == false)
 					{
 						cout << "Correct!" << endl;
-						break;
+						replaced = true;
 					}
 				}
 
@@ -96,36 +98,56 @@ void checkWord(string word, string correctWord)
 		if (guessedWord == true) break;
 		cout << "The word is " << word << endl;
 	}
-	
 }
 
+bool isValid(int number)
+{
+	if (number <= 0 || number > 15)
+	{
+		cout << "Put in a valid option!!!" << endl;
+		return false;
+	}
+	return true;
+}
+string difficultyInput()
+{
+	string difficulty;
+	bool valid = true;
+	do
+	{
+		/*If the user failed to input the difficulty correctly
+		 they'll be forced to do so again.*/
+		if (valid == false) cout << "Put in a valid option!!!" << endl;
+		cout << "What difficulty would you like to play on(easy, medium, hard): ";
+		cin >> difficulty;
+		valid = false;
+	}
+	/*This checks if the user inpuutted the difficulty correctly*/
+	while (difficulty != "easy" && difficulty != "medium" && difficulty != "hard");
+	return difficulty;
+}
 void Menu()
 {
 	WORD selectedWord;
 	int roundsCount, correct = 0, wrong = 0;
+	bool valid = false;
 	string difficulty;
-	cout << "How many rounds do you wish to play: ";
-	cin >> roundsCount;
+	while (valid == false)
+	{
+		cout << "How many rounds do you want to play (1-15): ";
+		cin >> roundsCount;
+		valid = isValid(roundsCount);
+	}
 	for (int i = 0; i < roundsCount; i++)
 	{
-		bool difficultyCheck = false;
-		do
-		{
-			/*If the user failed to input the difficulty correctly
-			 they'll be forced to do so again.*/
-			if (difficultyCheck == true) cout << "Put in a valid option!!!" << endl;
-			cout << "What difficulty would you like to play on(easy, medium, hard):";
-			cin >> difficulty;
-			difficultyCheck = true;
-		}
-		/*This checks if the user inpuutted the difficulty correctly*/
-		while (difficulty != "easy" && difficulty != "medium" && difficulty != "hard");
-
+		difficulty = difficultyInput();
 
 		selectedWord = randomWord();
-		string changedString= wordChanger(difficulty, selectedWord.name);
+
+		string changedString = wordChanger(difficulty, selectedWord.name);
 		cout << "The word is " << changedString << endl;
 		cout << "The topic is " << selectedWord.topic << endl;
-		checkWord(changedString,selectedWord.name);
+		checkWord(changedString, selectedWord.name);
 	}
+	cout << "You won!" << endl;
 }
