@@ -16,5 +16,4 @@ WORD words[6] = {
 	 {"Australia","countries"},
 	 {"Bulgaria","countries"},
 	 {"France","countries"},
-
 };

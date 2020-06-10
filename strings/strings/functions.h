@@ -4,6 +4,7 @@
 #include<string>    //String
 #include<stdlib.h>  //srand, rand
 #include<time.h>    //time
+#include<ctype.h>	///tolower
 #include"data.h"
 using namespace std;
 int getRandNumber(int lowerNumber, int upperNumber)
@@ -41,7 +42,7 @@ string wordChanger(string difficulty, string word)
 	}
 	while (hiddenLetters > 0 && availableleSpace > 1)
 	{
-		int delIndex = getRandNumber(0, word.size() - 1);
+		int delIndex = getRandNumber(1, word.size() - 1);
 		if (word[delIndex] != '_')
 		{
 			word[delIndex] = '_';
@@ -52,38 +53,50 @@ string wordChanger(string difficulty, string word)
 	}
 	return word;
 }
-
 void checkWord(string word, string correctWord)
 {
-		bool findOrNot;
-		cout << "Please, guess a letter from the word you're guessing!" << endl;
+	bool guessedWord = false;
+	while (1)
+	{
+		cout << "Please, guess a letter from the word you're guessing:";
 		char letter;
 		cin >> letter;
+		//makes the letter that you search for lowercase
+		letter = tolower(letter);
 		if (correctWord.find(letter) != string::npos)
 		{
+			
 			for (int i = 0; i < correctWord.size(); i++)
 			{
+				cout << correctWord[i] << " " << letter << endl;
 				if (correctWord[i] == letter)
 				{
 					word[i] = letter;
-					findOrNot = true;
+					if (word == correctWord)
+					{
+						cout << "Congratulations! You guessed the whole word!" << endl;
+						guessedWord = true;
+						break;
+					}
+					else
+					{
+						cout << "Correct!" << endl;
+						break;
+					}
 				}
-			}
-			if (word == correctWord)
-			{
-				cout << "Congratulations! You guessed the whole word!" << endl;
-			}
-			else
-			{
-				cout << "Correct!" << endl;
+
+
 			}
 		}
 		else
 		{
 			cout << "The word doesn't have that letter. Please try again:" << endl;
-			cin >> letter;
-			checkWord(word, correctWord);
 		}
+		/*You exit the loop if you have guessed the word*/
+		if (guessedWord == true) break;
+		cout << "The word is " << word << endl;
+	}
+	
 }
 
 void Menu()
@@ -113,6 +126,6 @@ void Menu()
 		string changedString= wordChanger(difficulty, selectedWord.name);
 		cout << "The word is " << changedString << endl;
 		cout << "The topic is " << selectedWord.topic << endl;
-		checkWord(selectedWord.name, changedString);
+		checkWord(changedString,selectedWord.name);
 	}
 }
