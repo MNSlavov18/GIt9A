@@ -53,15 +53,36 @@ string wordChanger(string difficulty, string word)
 	}
 	return word;
 }
+
 void checkWord(string word, string correctWord)
 {
 	bool guessedWord = false;
+	string strikes ;
 	while (1)
 	{
-		cout << "Please, guess a letter from the word you're guessing: ";
+		cout << "Please, guess a letter or the whole word: ";
 		char letter;
+		string guess;
 		bool replaced = false;
-		cin >> letter;
+		bool failedGame = false;
+		cin >> guess;
+		// If the user inputted a letter
+		if (guess.size() == 1) letter = guess[0];
+		// If the user inputted the correct word
+		else if (guess == correctWord)
+		{
+				cout << "Congratulations! You guessed the whole word!" << endl;
+				break;
+		}
+		//If the user inputted something other than a letter or the correct word
+		else
+		{
+			cout << "Your guess is incorrect." << endl;
+			strikes += "X";
+			cout << "strikes: " << strikes << endl;
+			continue;
+		}
+
 		//makes the letter that you search for lowercase
 		letter = tolower(letter);
 		if (correctWord.find(letter) != string::npos)
@@ -69,8 +90,6 @@ void checkWord(string word, string correctWord)
 
 			for (int i = 0; i < correctWord.size(); i++)
 			{
-				//cout << correctWord[i] << " " << letter << endl;
-				//blueberry r bluebe__y
 				if (correctWord[i] == letter)
 				{
 					word[i] = letter;
@@ -92,11 +111,13 @@ void checkWord(string word, string correctWord)
 		}
 		else
 		{
-			cout << "The word doesn't have that letter. Please try again:" << endl;
+			cout << "The word doesn't have that letter. Please try again." << endl;
+			strikes += "X";
+			
 		}
 		/*You exit the loop if you have guessed the word*/
 		if (guessedWord == true) break;
-		cout << "The word is " << word << endl;
+		
 	}
 }
 
