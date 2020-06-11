@@ -38,7 +38,12 @@ WORD words[30] = {
 	{"seafood", "food"},
 	{"milkshake", "drink"},
 	{"lemonade", "drink"},
-	{"coffee", "drink"}
+	{"coffee", "drink"},
+    {"football", "sport"},
+    {"basketball", "sport"},
+    {"swimming", "sport"},
+    {"volleyball", "sport"},
+   
 
 };
-int arraySize = 26;
+int arraySize = 29;
