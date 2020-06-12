@@ -13,10 +13,10 @@ struct WORD
 
 //the random word's that are 
 WORD words[35] = {
-	 {"sunflower","flowers"},
-	 {"Australia","countries"},
-	 {"Bulgaria","countries"},
-	 {"France","countries"},
+	{"sunflower","flowers"},
+	{"Australia","countries"},
+	{"Bulgaria","countries"},
+	{"France","countries"},
 	{"cucumber", "vegetable"},
 	{"watermelon", "fruit"},
 	{"blueberry", "fruit"},
